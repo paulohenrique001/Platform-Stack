@@ -1,0 +1,56 @@
+name: ${STACK_NAME}
+
+services:
+  dockge:
+    image: louislam/dockge:1
+    container_name: ${DOCKGE_CONTAINER_NAME}
+    restart: ${RESTART_POLICY}
+    environment:
+      DOCKGE_ENABLE_CONSOLE: ${DOCKGE_ENABLE_CONSOLE}
+      DOCKGE_STACKS_DIR: /opt/stacks
+      TZ: ${TZ}
+    ports:
+      - "${DOCKGE_PORT}:5001"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - dockge_data:/app/data
+      - ${DOCKGE_STACKS_PATH}:/opt/stacks
+    networks:
+      - platform
+
+  dozzle:
+    image: amir20/dozzle:latest
+    container_name: ${DOZZLE_CONTAINER_NAME}
+    restart: ${RESTART_POLICY}
+    environment:
+      DOZZLE_LEVEL: info
+      TZ: ${TZ}
+    ports:
+      - "${DOZZLE_PORT}:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - platform
+
+  uptime-kuma:
+    image: louislam/uptime-kuma:2
+    container_name: ${UPTIME_KUMA_CONTAINER_NAME}
+    restart: ${RESTART_POLICY}
+    environment:
+      TZ: ${TZ}
+    ports:
+      - "${UPTIME_KUMA_PORT}:3001"
+    volumes:
+      - uptime_kuma_data:/app/data
+    networks:
+      - platform
+
+volumes:
+  dockge_data:
+    name: ${DOCKGE_DATA_VOLUME_NAME}
+  uptime_kuma_data:
+    name: ${UPTIME_KUMA_DATA_VOLUME_NAME}
+
+networks:
+  platform:
+    name: ${PLATFORM_NETWORK_NAME}

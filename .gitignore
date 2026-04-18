@@ -1,0 +1,8 @@
+.env
+
+stacks/*
+!stacks/.gitkeep
+
+*.log
+.DS_Store
+Thumbs.db
