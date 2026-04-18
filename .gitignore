@@ -2,6 +2,10 @@
 
 stacks/*
 !stacks/.gitkeep
+!stacks/*/
+!stacks/*/compose.yaml
+!stacks/*/.env.example
+!stacks/*/README.md
 
 *.log
 .DS_Store
