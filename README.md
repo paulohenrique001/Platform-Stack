@@ -1,5 +1,7 @@
 # Platform Stack
 
+![Platform Stack banner](banner.png)
+
 Template de plataforma local para desenvolvimento com Docker Compose.
 
 A stack principal sobe Dockge, Dozzle e Uptime Kuma para gerenciamento leve de stacks Compose, logs locais e monitoramento simples.
