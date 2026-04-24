@@ -1,6 +1,6 @@
 # MariaDB Stack
 
-Stack opcional para desenvolvimento local com MariaDB e phpMyAdmin.
+Stack opcional para desenvolvimento local com MariaDB.
 
 Ela fica desabilitada por padrão porque está fora do `docker-compose.yml` principal. O desenvolvedor ativa somente quando precisar de banco relacional no ambiente local.
 
@@ -9,7 +9,6 @@ Ela fica desabilitada por padrão porque está fora do `docker-compose.yml` prin
 | Serviço | Uso | URL/porta |
 | --- | --- | --- |
 | MariaDB | Banco relacional local | `localhost:3306` |
-| phpMyAdmin | Gerenciador web do banco | `http://localhost:8081` |
 
 ## Como ativar
 
@@ -33,15 +32,23 @@ docker compose --env-file .env up -d
 
 ## Acesso
 
-No phpMyAdmin, use:
+Use estes dados em clientes locais:
 
 ```text
-Servidor: mariadb
-Usuário: app
-Senha: change_me_app_password
+Host: localhost
+Porta local: 3306
+Usuario: app
+Senha: app
+Database: app
 ```
 
-Também é possível entrar como `root` usando `change_me_root_password`.
+Para usar o CLI dentro do container:
+
+```bash
+docker compose --env-file .env exec mariadb mariadb -uapp -papp app
+```
+
+Também é possível conectar como `root` usando `root`.
 
 Antes de usar em um projeto compartilhado, ajuste as senhas no `.env` local.
 

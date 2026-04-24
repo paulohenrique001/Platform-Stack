@@ -35,13 +35,13 @@ docker compose --env-file .env up -d
 String local:
 
 ```text
-mongodb://root:change_me_mongodb_password@localhost:27017/app?authSource=admin
+mongodb://root:mongo@localhost:27017/app?authSource=admin
 ```
 
 Para usar o `mongosh` dentro do próprio MongoDB:
 
 ```bash
-docker compose --env-file .env exec mongodb mongosh -u root -p change_me_mongodb_password --authenticationDatabase admin
+docker compose --env-file .env exec mongodb mongosh -u root -p mongo --authenticationDatabase admin
 ```
 
 Antes de usar em um projeto compartilhado, ajuste a senha no `.env` local.

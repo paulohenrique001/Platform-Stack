@@ -1,17 +1,16 @@
-name: ${STACK_NAME:-mongodb}
+name: mongodb
 
 services:
   mongodb:
     image: mongo:7
-    container_name: ${MONGODB_CONTAINER_NAME:-dockge-mongodb}
-    restart: ${RESTART_POLICY:-unless-stopped}
+    restart: unless-stopped
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_ROOT_USERNAME:-root}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_ROOT_PASSWORD:-change_me_mongodb_password}
-      MONGO_INITDB_DATABASE: ${MONGODB_DATABASE:-app}
-      TZ: ${TZ:-America/Sao_Paulo}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGODB_DATABASE}
+      TZ: America/Sao_Paulo
     ports:
-      - "${MONGODB_PORT:-27017}:27017"
+      - "${MONGODB_PORT}:27017"
     volumes:
       - mongodb_data:/data/db
     healthcheck:
@@ -29,8 +28,8 @@ services:
 
 volumes:
   mongodb_data:
-    name: ${MONGODB_DATA_VOLUME_NAME:-dockge_mongodb_data}
+    name: dockge_mongodb_data
 
 networks:
   mongodb:
-    name: ${MONGODB_NETWORK_NAME:-dockge_mongodb_network}
+    name: dockge_mongodb_network

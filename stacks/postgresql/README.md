@@ -1,6 +1,6 @@
 # PostgreSQL Stack
 
-Stack opcional para desenvolvimento local com PostgreSQL e pgAdmin.
+Stack opcional para desenvolvimento local com PostgreSQL.
 
 Ela fica desabilitada por padrão porque está fora do `docker-compose.yml` principal.
 
@@ -9,7 +9,6 @@ Ela fica desabilitada por padrão porque está fora do `docker-compose.yml` prin
 | Serviço | Uso | URL/porta |
 | --- | --- | --- |
 | PostgreSQL | Banco relacional local | `localhost:5432` |
-| pgAdmin | Gerenciador web do banco | `http://localhost:5050` |
 
 ## Como ativar
 
@@ -33,24 +32,23 @@ docker compose --env-file .env up -d
 
 ## Acesso
 
-No pgAdmin, entre com:
+Use estes dados em clientes locais:
 
 ```text
-Email: admin@example.local
-Senha: change_me_pgadmin_password
-```
-
-Ao registrar o servidor PostgreSQL no pgAdmin, use:
-
-```text
-Host: postgresql
-Porta: 5432
-Usuário: app
-Senha: change_me_postgresql_password
+Host: localhost
+Porta local: 5432
+Usuario: app
+Senha: postgres
 Database: app
 ```
 
-Antes de usar em um projeto compartilhado, ajuste as senhas no `.env` local.
+Para usar o CLI dentro do container:
+
+```bash
+docker compose --env-file .env exec postgresql psql -U app -d app
+```
+
+Antes de usar em um projeto compartilhado, ajuste a senha no `.env` local.
 
 ## Como desativar
 

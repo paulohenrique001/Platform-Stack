@@ -1,19 +1,18 @@
-name: ${STACK_NAME:-elasticsearch}
+name: elasticsearch
 
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:${ELASTIC_STACK_VERSION:-8.15.3}
-    container_name: ${ELASTICSEARCH_CONTAINER_NAME:-dockge-elasticsearch}
-    restart: ${RESTART_POLICY:-unless-stopped}
+    image: docker.elastic.co/elasticsearch/elasticsearch:${ELASTIC_STACK_VERSION}
+    restart: unless-stopped
     environment:
       discovery.type: single-node
       xpack.security.enabled: "false"
       xpack.security.enrollment.enabled: "false"
-      ES_JAVA_OPTS: ${ES_JAVA_OPTS:--Xms512m -Xmx512m}
-      TZ: ${TZ:-America/Sao_Paulo}
+      ES_JAVA_OPTS: ${ES_JAVA_OPTS}
+      TZ: America/Sao_Paulo
     ports:
-      - "${ELASTICSEARCH_HTTP_PORT:-9200}:9200"
-      - "${ELASTICSEARCH_TRANSPORT_PORT:-9300}:9300"
+      - "${ELASTICSEARCH_HTTP_PORT}:9200"
+      - "${ELASTICSEARCH_TRANSPORT_PORT}:9300"
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
     healthcheck:
@@ -37,16 +36,15 @@ services:
       - elasticsearch
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:${ELASTIC_STACK_VERSION:-8.15.3}
-    container_name: ${KIBANA_CONTAINER_NAME:-dockge-kibana}
-    restart: ${RESTART_POLICY:-unless-stopped}
+    image: docker.elastic.co/kibana/kibana:${ELASTIC_STACK_VERSION}
+    restart: unless-stopped
     environment:
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
       SERVER_NAME: kibana
       SERVER_HOST: 0.0.0.0
-      TZ: ${TZ:-America/Sao_Paulo}
+      TZ: America/Sao_Paulo
     ports:
-      - "${KIBANA_PORT:-5601}:5601"
+      - "${KIBANA_PORT}:5601"
     depends_on:
       elasticsearch:
         condition: service_healthy
@@ -55,8 +53,8 @@ services:
 
 volumes:
   elasticsearch_data:
-    name: ${ELASTICSEARCH_DATA_VOLUME_NAME:-dockge_elasticsearch_data}
+    name: dockge_elasticsearch_data
 
 networks:
   elasticsearch:
-    name: ${ELASTICSEARCH_NETWORK_NAME:-dockge_elasticsearch_network}
+    name: dockge_elasticsearch_network

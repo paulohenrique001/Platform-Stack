@@ -24,23 +24,23 @@ Stacks opcionais:
 
 - Redis: `REDIS_PORT=6379`, `REDIS_INSIGHT_PORT=5540`
 - Neo4j: `NEO4J_HTTP_PORT=7474`, `NEO4J_BOLT_PORT=7687`
-- MariaDB: `MARIADB_PORT=3306`, `PHPMYADMIN_PORT=8081`
+- MariaDB: `MARIADB_PORT=3306`
 - MongoDB: `MONGODB_PORT=27017`
 - DynamoDB Local: `DYNAMODB_PORT=8000`
-- PostgreSQL: `POSTGRESQL_PORT=5432`, `PGADMIN_PORT=5050`
+- PostgreSQL: `POSTGRESQL_PORT=5432`
 - Elasticsearch: `ELASTICSEARCH_HTTP_PORT=9200`, `ELASTICSEARCH_TRANSPORT_PORT=9300`, `KIBANA_PORT=5601`
 
 Essas variáveis ficam no `.env` local de cada stack opcional.
 
 ## Dockge não encontra stacks
 
-As stacks precisam estar dentro de `stacks/<nome-da-stack>/compose.yaml` ou `stacks/<nome-da-stack>/docker-compose.yml`.
+As stacks precisam estar dentro de `stacks/<nome-da-stack>/docker-compose.yml`.
 
 Depois use a opção de scan do Dockge para atualizar a lista.
 
 As stacks em `stacks/` vêm prontas no template, mas ficam desabilitadas até o desenvolvedor subir pelo Dockge ou executar `docker compose --env-file .env up -d` dentro da pasta correspondente.
 
-Para o Dockge gerenciar uma stack, o `STACK_NAME` deve ser igual ao nome da pasta. Exemplo: `stacks/redis/.env` deve manter `STACK_NAME=redis`. Se esse valor for `dockge-redis`, o Dockge pode listar a stack de arquivo como inativa e mostrar o projeto `dockge-redis` como "não gerenciado".
+O nome do projeto Compose das stacks opcionais fica fixo no próprio `docker-compose.yml`, igual ao nome da pasta. Se uma stack aparecer fora do Dockge, confirme se ela foi iniciada dentro da pasta correta ou pela interface do Dockge.
 
 Se uma stack usa bind mounts, configure `DOCKGE_STACKS_PATH` com um caminho absoluto acessível pelo Docker. Isso evita que o Docker crie volumes em outro lugar quando o Compose for executado pelo Dockge.
 
@@ -48,12 +48,11 @@ Se uma stack usa bind mounts, configure `DOCKGE_STACKS_PATH` com um caminho abso
 
 Se a mensagem for "Esta stack não é gerenciada pelo Dockge", confira:
 
-- O arquivo está em `stacks/<nome-da-stack>/compose.yaml`.
-- O `.env` local da stack usa `STACK_NAME=<nome-da-stack>`.
+- O arquivo está em `stacks/<nome-da-stack>/docker-compose.yml`.
 - A stack foi iniciada dentro da própria pasta ou pelo Dockge.
 - Não existe um projeto antigo com nome `platform-*` ainda rodando.
 
-Se ela já foi iniciada com `STACK_NAME=platform-*`, derrube a stack antiga pelo terminal usando o `.env` antigo ou pelo nome do projeto antigo, depois recrie com o `.env` novo. Containers antigos não passam a ser gerenciados automaticamente pelo Dockge.
+Se ela já foi iniciada com um nome de projeto antigo como `platform-*`, derrube a stack antiga pelo terminal usando o nome do projeto antigo, depois recrie com o compose atual. Containers antigos não passam a ser gerenciados automaticamente pelo Dockge.
 
 ## Elasticsearch não inicia
 

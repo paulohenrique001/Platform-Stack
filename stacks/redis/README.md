@@ -39,13 +39,13 @@ Use estes dados no Redis Insight ou em clientes locais:
 Host: redis
 Porta interna: 6379
 Porta local: 6379
-Senha: change_me_redis_password
+Senha: redis
 ```
 
 Para usar o CLI dentro do container:
 
 ```bash
-docker compose --env-file .env exec redis redis-cli -a change_me_redis_password
+docker compose --env-file .env exec redis redis-cli -a redis
 ```
 
 Antes de usar em um projeto compartilhado, ajuste a senha no `.env` local.

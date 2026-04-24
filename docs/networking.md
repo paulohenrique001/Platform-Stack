@@ -17,11 +17,9 @@ Stacks opcionais, usadas somente quando o desenvolvedor ativar a stack correspon
 - Neo4j Browser: `7474`
 - Neo4j Bolt: `7687`
 - MariaDB: `3306`
-- phpMyAdmin: `8081`
 - MongoDB: `27017`
 - DynamoDB Local: `8000`
 - PostgreSQL: `5432`
-- pgAdmin: `5050`
 - Elasticsearch HTTP: `9200`
 - Elasticsearch transport: `9300`
 - Kibana: `5601`
@@ -54,4 +52,4 @@ Cada stack opcional cria a própria rede:
 - `dockge_postgresql_network`
 - `dockge_elasticsearch_network`
 
-Outros projetos podem usar as portas locais ou entrar na rede da stack correspondente quando precisarem conversar com o serviço por nome de container.
+Outros projetos podem usar as portas locais ou entrar na rede da stack correspondente quando precisarem conversar com o serviço pelo nome definido no Compose.

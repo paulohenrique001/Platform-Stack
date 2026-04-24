@@ -1,0 +1,38 @@
+name: dynamodb
+
+services:
+  dynamodb-local:
+    image: amazon/dynamodb-local:latest
+    restart: unless-stopped
+    user: root
+    command: -jar DynamoDBLocal.jar -sharedDb -dbPath ./data
+    working_dir: /home/dynamodblocal
+    ports:
+      - "${DYNAMODB_PORT}:8000"
+    volumes:
+      - dynamodb_data:/home/dynamodblocal/data
+    networks:
+      - dynamodb
+
+  aws-cli:
+    image: amazon/aws-cli:latest
+    restart: unless-stopped
+    entrypoint: ["sh", "-c", "sleep infinity"]
+    environment:
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION}
+      DYNAMODB_ENDPOINT_URL: http://dynamodb-local:8000
+      TZ: America/Sao_Paulo
+    depends_on:
+      - dynamodb-local
+    networks:
+      - dynamodb
+
+volumes:
+  dynamodb_data:
+    name: dockge_dynamodb_data
+
+networks:
+  dynamodb:
+    name: dockge_dynamodb_network

@@ -38,7 +38,7 @@ No Neo4j Browser, use:
 ```text
 URL: http://localhost:7474
 Usuário: neo4j
-Senha: change_me_neo4j_password
+Senha: neo4jpass
 Bolt: bolt://localhost:7687
 ```
 

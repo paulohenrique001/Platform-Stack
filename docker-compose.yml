@@ -1,14 +1,13 @@
-name: ${STACK_NAME}
+name: dockge-platform
 
 services:
   dockge:
     image: louislam/dockge:1
-    container_name: ${DOCKGE_CONTAINER_NAME}
-    restart: ${RESTART_POLICY}
+    restart: unless-stopped
     environment:
       DOCKGE_ENABLE_CONSOLE: ${DOCKGE_ENABLE_CONSOLE}
       DOCKGE_STACKS_DIR: /opt/stacks
-      TZ: ${TZ}
+      TZ: America/Sao_Paulo
     ports:
       - "${DOCKGE_PORT}:5001"
     volumes:
@@ -20,11 +19,10 @@ services:
 
   dozzle:
     image: amir20/dozzle:latest
-    container_name: ${DOZZLE_CONTAINER_NAME}
-    restart: ${RESTART_POLICY}
+    restart: unless-stopped
     environment:
       DOZZLE_LEVEL: info
-      TZ: ${TZ}
+      TZ: America/Sao_Paulo
     ports:
       - "${DOZZLE_PORT}:8080"
     volumes:
@@ -34,10 +32,9 @@ services:
 
   uptime-kuma:
     image: louislam/uptime-kuma:2
-    container_name: ${UPTIME_KUMA_CONTAINER_NAME}
-    restart: ${RESTART_POLICY}
+    restart: unless-stopped
     environment:
-      TZ: ${TZ}
+      TZ: America/Sao_Paulo
     ports:
       - "${UPTIME_KUMA_PORT}:3001"
     volumes:
@@ -47,10 +44,10 @@ services:
 
 volumes:
   dockge_data:
-    name: ${DOCKGE_DATA_VOLUME_NAME}
+    name: dockge_dockge_data
   uptime_kuma_data:
-    name: ${UPTIME_KUMA_DATA_VOLUME_NAME}
+    name: dockge_uptime_kuma_data
 
 networks:
   platform:
-    name: ${PLATFORM_NETWORK_NAME}
+    name: dockge_platform_network
