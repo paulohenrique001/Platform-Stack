@@ -28,6 +28,7 @@ As stacks opcionais ficam em `stacks/` e não sobem junto com a plataforma base.
 | `stacks/redis` | Redis + Redis Insight | Desabilitada | Redis `localhost:6379`, Redis Insight `http://localhost:5540` |
 | `stacks/neo4j` | Neo4j com Browser embutido | Desabilitada | Browser `http://localhost:7474`, Bolt `localhost:7687` |
 | `stacks/mariadb` | MariaDB | Desabilitada | MariaDB `localhost:3306` |
+| `stacks/mysql` | MySQL | Desabilitada | MySQL `localhost:3306` |
 | `stacks/mongodb` | MongoDB com `mongosh` no container | Desabilitada | MongoDB `localhost:27017` |
 | `stacks/dynamodb` | DynamoDB Local + AWS CLI | Desabilitada | DynamoDB `http://localhost:8000` |
 | `stacks/postgresql` | PostgreSQL | Desabilitada | PostgreSQL `localhost:5432` |
